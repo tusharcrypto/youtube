@@ -1,0 +1,22 @@
+.vedio-container{
+  background-color: #f9f9f9;
+  padding-left: 17%;
+  padding-right: 2%;
+  padding-top: 15px;
+  padding-bottom: 20px;
+  overflow-x: hidden;
+}
+.vedio-container-large{
+  background-color: #f9f9f9;
+  padding-left: 10%;
+  padding-right: 2%;
+  padding-top: 15px;
+  padding-bottom: 20px;
+  overflow-x: hidden;
+}
+@media (max-width:900px){
+  .vedio-container , .vedio-container-large{
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}

@@ -1,0 +1,35 @@
+/* Base Styles */
+.vedio-run-conatiner {
+  display: flex;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding: 20px 0px;
+  justify-content: space-between;
+  box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .vedio-run-conatiner {
+    flex-direction: column; /* Stack elements vertically on smaller screens */
+    padding-left: 10px; /* Adjust padding for smaller screens */
+    padding-right: 10px;
+  }
+
+  .vedio-run-conatiner .vid {
+    position: static; /* Remove fixed positioning for better responsiveness */
+    width: 100%; /* Ensure the video takes full width */
+    margin-bottom: 20px; /* Add spacing between stacked elements */
+  }
+}
+
+@media (max-width: 600px) {
+  .vedio-run-conatiner {
+    padding-left: 5px; /* Further reduce padding for very small screens */
+    padding-right: 5px;
+  }
+
+  .vedio-run-conatiner .vid {
+    margin-bottom: 15px; /* Reduce spacing for very small screens */
+  }
+}

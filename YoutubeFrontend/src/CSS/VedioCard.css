@@ -1,0 +1,33 @@
+.vedio-card{
+  display: grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr)) ;
+  grid-column-gap: 16px;
+  grid-row-gap: 15px;
+  margin-top: 15px;
+  /* z-index: 1; */
+
+}
+.vedio-card a{
+ text-decoration: none;
+ color: inherit;
+}
+.card img{
+  width: 100%;
+  border-radius: 10px;
+}
+.card h2{
+  font-size: 15px;
+  font-family: sans-serif;
+  font-weight: 600;
+  color: black;
+  margin: 5px 0;
+}
+.card h3{
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  margin: 4px 0;
+}
+.card p{
+  font-size: 14px;
+}
