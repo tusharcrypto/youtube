@@ -10,7 +10,7 @@ dotenv.config();
 export async function homepagevedio(req,res){
   try {
     const vedio = await Video.find().populate('channel')
-    // console.log(vedio)
+    console.log(vedio)
     res.send(vedio);
   } catch (error) {
     res.send(error)
@@ -76,7 +76,7 @@ export async function getvediobychannel(req,res){
     const {id} = req.params;
     const channeldata = await Video.find().populate('channel')
     const filertdata = channeldata.filter(video => video.channel._id.toString()==id)
-    console.log(filertdata)
+    // console.log(filertdata)
     if(!channeldata){
       return res.status(404).json({msg:"Channel not found"})
     }
@@ -86,8 +86,16 @@ export async function getvediobychannel(req,res){
   }
 }
 
-export function deletevideobychannel(req,res){
-
+// delete video by channel
+export async function deletevideobychannel(req,res){
+ try {
+  const {channelID,videoID} = req.body;
+  const channel = await Video.findByIdAndDelete(videoID)
+  console.log(channel)
+  
+ } catch (error) {
+  res.send(error)
+ }
 }
 //update the vedio likes
 export async function updatelikebyvedio(req,res){
@@ -216,13 +224,13 @@ export async function updatesubscriber(req, res) {
       updateinfo = await Channel.findByIdAndUpdate(
         id,
         { subscribercount: channelInfo.subscribercount + 1, issubscribed: true },
-        { new: true } // ✅ This ensures the updated document is returned
+        { new: true } 
       );
     } else {
       updateinfo = await Channel.findByIdAndUpdate(
         id,
         { subscribercount: channelInfo.subscribercount - 1, issubscribed: false },
-        { new: true } // ✅ Ensures the updated values are returned
+        { new: true }
       );
     }
 
@@ -261,12 +269,12 @@ export async function addcomment(req,res){
 
 export async function editcomment(req, res) {
   const { commentId, updatedComment } = req.body; 
-  console.lo(comm)
+  console.log("commetID",commentId)
 
   try {
     // Find the video that contains the comment
     const video = await Video.findOne({ "comments._id": commentId });
-
+    console.log("comments", video)
     if (!video) {
       return res.status(404).json({ message: "Video not found" });
     }
@@ -314,5 +322,61 @@ export async function deletecomment(req, res) {
   } catch (error) {
     console.error(error);
     return res.status(400).json({ error: "Failed to delete comment" });
+  }
+}
+
+//update views
+
+export async function updateview(req, res) {
+  try {
+    const { id } = req.body;  
+    const video = await Video.findById(id);
+    if (!video) {
+      return res.status(404).send({ message: 'Video not found' });
+    }
+
+   
+    video.viewCount += 1;
+    await video.save(); 
+    res.status(200).send({ viewCount: video.viewCount });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: 'Error updating view count' });
+  }
+}
+//update channelinfo
+
+export async function updateCahnnelInfo(req, res) {
+  try {
+    const { channelID, updatedtitle, updateddesp } = req.body;
+    const channel = await Channel.findByIdAndUpdate(
+      channelID,
+      { channelName: updatedtitle, description: updateddesp },
+      { new: true }
+    );
+
+    if (!channel) {
+      return res.status(404).json({ error: "Channel not found" });
+    }
+
+    res.json(channel);
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+}
+
+//delete channel
+export async function deletechannel(req, res) {
+  try {
+    const { channelID } = req.body;
+    const deletedChannel = await Channel.findByIdAndDelete(channelID);
+
+    if (!deletedChannel) {
+      return res.status(404).json({ msg: "Channel not found" });
+    }
+
+    res.status(200).json({ msg: "Deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
   }
 }
