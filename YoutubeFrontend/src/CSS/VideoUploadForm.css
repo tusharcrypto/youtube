@@ -1,6 +1,6 @@
 /* Container */
 .video-upload-container {
-  width: 100%;
+  width: 95%;
   max-width: 500px;
   margin: auto;
   padding: 20px;
@@ -79,10 +79,16 @@ textarea {
   align-items: center;
   z-index: 999;
 }
+.close-btn{
+  width: 50px;
+  position: absolute;
+}
 
 @media (max-width: 600px) {
   .video-upload-container {
+    width: 95%;
     padding: 15px;
+    padding-bottom: 40px;
   }
 
   input, textarea {

@@ -3,7 +3,7 @@ import "../CSS/TopFilter.css";
 import { AuthContext } from "../../Utility/AuthContex";
 
 const TopFilter = () => {
-  const filters = ["All", "Music", "Sport", "Travel", "Comedy", "Entertainment"];
+  const filters = ["Music", "Sport", "Travel", "Comedy", "Entertainment"];
   const {setfilter} = useContext(AuthContext);
   return (
     <div className="top-filter">

@@ -11,14 +11,20 @@
  text-decoration: none;
  color: inherit;
 }
-.card img{
+.card-img{
+  width: 320px;
+  border-radius: 10px;
+}
+.cardimgregular{
   width: 100%;
   border-radius: 10px;
 }
 .card h2{
-  font-size: 15px;
+  width: 300px;
+  font-size: 14px;
   font-family: sans-serif;
   font-weight: 600;
+  text-wrap: wrap;
   color: black;
   margin: 5px 0;
 }

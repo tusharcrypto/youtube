@@ -24,6 +24,14 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 }
+.logo{
+  display: flex;
+  gap: 10px;
+}
+.editoption{
+  margin-left: 20px;
+  max-width: 40px;
+}
 
 .logo img {
   width: 80px;
@@ -81,7 +89,9 @@
 .video-container {
   padding: 20px;
 }
-
+.video-container a{
+  text-decoration: none;
+}
 .video-title {
   font-size: 18px;
   font-weight: bold;
@@ -118,6 +128,7 @@
 .video-title {
   font-size: 16px;
   font-weight: bold;
+  color: black;
   margin: 5px 0;
 }
 
@@ -125,7 +136,50 @@
   font-size: 14px;
   color: #666;
 }
+.editdelete{
+  display: flex;
+  align-items: center;
+}
+.option{
+  position: relative;
+  max-width: 20px;
+  left: 40%;
+}
 
+.edit-form{
+  position: fixed;
+  top: 30%;
+  left: 0;
+  right: 0;
+  width: 95%;
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+.edit-form form label{
+  font-size: 15px;
+  /* padding: 10px 0; */
+}
+.edit-form h3{
+  text-align: center;
+}
+.edit-form form input{
+  margin: 5px 0;
+}
+.editbtn{
+  background-color:purple;
+  color: white;
+  font-size: 16px;
+  padding: 12px;
+  border: none;
+  margin: 10px 0px;
+  border-radius: 5px;
+  cursor: pointer;
+}
 /* Responsive Design */
 @media (max-width: 768px) {
   .logo-info {
@@ -145,6 +199,12 @@
   .video-card {
     width: 100%;
     max-width: 320px;
+  }
+  .editoption{
+    position:absolute;
+    left: 0%;
+    width: 40px;
+    max-width: 40px;
   }
 }
 
@@ -167,5 +227,11 @@
 
   .video-card {
     max-width: 100%;
+  }
+  .editoption{
+    position:absolute;
+    left: 0%;
+    width: 40px;
+    max-width: 40px;
   }
 }

@@ -37,9 +37,15 @@ const Navbar = () => {
     <nav className='flex-div'>
       <div className="nav-left flex-div">
         <img src={menu} className='menu' onClick={tooglefn} alt="menu" />
-        <img src={logo} className='logo' alt="logo" onClick={()=>{
-          navigate('/')
-        }} />
+        <img 
+  src={logo} 
+  className='logo' 
+  alt="logo" 
+  onClick={() => {
+    window.location.href = '/';
+  }} 
+/>
+
       </div>
 
       <div className="nav-middle flex-div">

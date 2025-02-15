@@ -5,7 +5,7 @@ import { useParams } from "react-router";
 const VedioRecommendation = () => {
   const [videos, setData] = useState();
   const { videoid } = useParams();
-  console.log(videoid)
+  // console.log(videoid)
   async function getdata() {
     const response = await fetch("http://localhost:4000/api/homepagevedio", {
       method: "GET",
@@ -15,8 +15,28 @@ const VedioRecommendation = () => {
     });
     const data = await response.json();
     setData(data);
-    console.log(data)
+    // console.log(data)
   }
+  async function handleview(id) {
+    try {
+      console.log(id)
+      const response = await fetch('http://localhost:4000/api/updateview',{
+        method:'PUT',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({id:id}),
+      })
+      if(!response.ok){
+        console.log("something wnet wrong")
+      }
+      const data = await response.json();
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
+    
+   }
   useEffect(() => {
     getdata();
   }, [videoid]);
@@ -33,6 +53,9 @@ const VedioRecommendation = () => {
           pathname: `/vedio/${video._id}`,
         }}
           className="recommendation-card flex-div"
+          onClick={()=>{
+            handleview(video._id)
+          }}
           key={video._id}
         >
           <img src={video.thumbnailUrl} alt={video.title} />

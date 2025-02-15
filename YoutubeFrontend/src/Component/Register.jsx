@@ -1,11 +1,14 @@
 import { useState } from "react";
 import '../CSS/Register.css'
+import { Link } from "react-router";
 export default function Register() {
   const [userinfo, setUserinfo] = useState({
     username: "",
     useremail: "",
     password: "",
   });
+  const[msg,setmsg] = useState("")
+  const[isvisible,setvisible] = useState(false)
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -33,9 +36,11 @@ function resetvalue(){
   
       if (!response.ok) {
         console.log("User is not registered");
+        setmsg("User is not Registered")
       } else {
         const result = await response.json();
         console.log("User registered successfully:", result);
+        setmsg("User registered successfully:")
         resetvalue();
       }
     } catch (error) {
@@ -78,6 +83,8 @@ function resetvalue(){
           onChange={handleChange}
         />
         <input type="submit" value="Register" />
+        {isvisible ?<p>{msg}</p>:""}
+        <Link to='/login' style={{marginTop:'10px'}}>Login Now</Link>
       </form>
     </div>
   );

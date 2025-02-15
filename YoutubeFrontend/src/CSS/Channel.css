@@ -84,6 +84,9 @@
 .channel-header a {
   margin: 10px 0px;
 }
+.delete{
+  width: 25px;
+}
 
 @media (max-width: 768px) {
   .channel-container {

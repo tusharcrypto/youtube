@@ -20,10 +20,10 @@ function App() {
      <Routes>
       <Route path='/' element={<PrivateRoute><Home></Home></PrivateRoute>}></Route>
       <Route path='/vedio/:videoid' element={<VedioPage></VedioPage>}></Route>
-      <Route path='/login' element={<Login></Login>}></Route>
+      <Route path='/register' element={<Register></Register>}></Route>
       <Route path='/channel' element={<Channel></Channel>}></Route>
       <Route path='/channelPage/:id' element={<ChannelPage/>}></Route>
-      <Route path='/register' element={<Register></Register>}></Route>
+      <Route path='/login' element={<Login></Login>}></Route>
      </Routes>
      </Authprovider>
     </>

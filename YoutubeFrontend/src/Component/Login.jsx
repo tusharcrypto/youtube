@@ -1,11 +1,13 @@
 import { useContext, useState } from "react";
 import '../CSS/Register.css';
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../Utility/AuthContex";
 
 export default function Login() {
   const navigate = useNavigate();
+  const[msg,setmsg] = useState("")
   const{login} = useContext(AuthContext)
+  const[isvisible,setvisible] = useState(false)
   const [userinfo, setUserinfo] = useState({
     useremail: "",
     password: "",
@@ -17,6 +19,7 @@ export default function Login() {
   }
 
   async function handleSubmit(e) {
+    setvisible(true)
     e.preventDefault();
     try {
       const response = await fetch("http://localhost:4000/api/loginuser", {
@@ -30,11 +33,13 @@ export default function Login() {
       const result = await response.json(); 
 
       if (response.status !== 200) {
+        setmsg("Login Failed")
         console.log("Login failed:", result.msg); 
       } else {
         console.log("Login successful! Token:", result.token);
         localStorage.setItem("token", result.token);
         localStorage.setItem("User",JSON.stringify(result.user))
+        setmsg("Login Successful")
         login(); 
         navigate("/")
       }
@@ -64,8 +69,11 @@ export default function Login() {
           name="password"
           onChange={handleChange}
         />
-
+    
         <input type="submit" value="Login" />
+        <p></p>
+        {isvisible ?<p>{msg}</p>:""}
+        <Link to='/register' style={{marginTop:'10px'}}>Register Now</Link>
       </form>
     </div>
   );

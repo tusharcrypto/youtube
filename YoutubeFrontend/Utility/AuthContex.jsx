@@ -8,6 +8,7 @@ export function Authprovider({ children }){
   const [search,setsearchdata] = useState("");
   const [toggel,settoggle] = useState(false)
   const [filteropt,setfilter] = useState("");
+  const [editflag, seteditflag] = useState(true);
  function tooglefn(){
   settoggle(!toggel)
  }
@@ -19,5 +20,5 @@ export function Authprovider({ children }){
   function logout(){
     setAuthorisation(false);
   }
- return <AuthContext.Provider value={{isAuthorised,login,logout,toggel,tooglefn,search,setsearchdata,filteropt,setfilter}}>{children}</AuthContext.Provider>
+ return <AuthContext.Provider value={{isAuthorised,login,logout,toggel,tooglefn,search,setsearchdata,filteropt,setfilter,editflag, seteditflag}}>{children}</AuthContext.Provider>
 }
