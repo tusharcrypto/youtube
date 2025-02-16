@@ -31,7 +31,10 @@ export default function Login() {
       });
 
       const result = await response.json(); 
-
+      if(response.status==404){
+        alert("User not exsits Register now")
+        navigate("/register")
+      }
       if (response.status !== 200) {
         setmsg("Login Failed")
         console.log("Login failed:", result.msg); 

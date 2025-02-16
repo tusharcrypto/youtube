@@ -1,5 +1,5 @@
 import User from "../Model/user.model.js";
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import dotenv from "dotenv";
 import { Video } from "../Model/vedio.model.js";
@@ -149,27 +149,44 @@ export async function allchannel(req,res){
  res.status(200).json(channels)
 }
 // register the user
-export async function registeruser(req,res){
-   try {
-    const{username,useremail,password} = req.body;
-    // console.log(username,useremail,password);
-    const exsistinguser = await User.findOne({useremail})
-    if(exsistinguser){
-     return res.status(409).json({"message":"user all ready exists login directly"})
-    }
-    const haspassword = await bcrypt.hash(password,10);
-   const newUser = new User({
-    username:username,
-    useremail:useremail,
-    password:haspassword
-   })
-   await newUser.save();
-    res.status(200).json({"message":"user register successfuly" });
-   } catch (error) {
-    res.status(400).json({message:"Something went wrong"})
-   }
 
+
+export async function registeruser(req, res) {
+  try {
+    const { username, useremail, password } = req.body;
+
+
+    const exsistinguser = await User.findOne({ useremail });
+    if (exsistinguser) {
+      return res.status(409).json({ "message": "User already exists, please login" });
+    }
+
+
+    const haspassword = await bcrypt.hash(password, 10);
+
+
+    const newUser = new User({
+      username: username,
+      useremail: useremail,
+      password: haspassword
+    });
+    await newUser.save();
+
+
+    const token = jwt.sign(
+      { userId: newUser._id, email: newUser.useremail }, 
+      process.env.SIGNATURE,
+      { expiresIn: "15min" }
+    );
+
+    
+    res.status(200).json({ "message": "User registered successfully", token, user: newUser });
+  } catch (error) {
+    console.error("Registration Error:", error);
+    res.status(500).json({ message: "Something went wrong" });
+  }
 }
+
 
 //login user
 export async function loginuser(req,res){
@@ -182,15 +199,13 @@ export async function loginuser(req,res){
       return res.status(404).json({ msg: "User does not exist, register now" });
     }
 
-    // Verify password
+    
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(401).json({ msg: "Invalid password" });
     }
 
-    // console.log("Logged In");
 
-    // Generate JWT token (Do not include password)
     const token = jwt.sign(
       { userId: user._id, email: user.useremail }, // Secure payload
       process.env.SIGNATURE,

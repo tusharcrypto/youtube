@@ -1,7 +1,11 @@
 import { useState } from "react";
 import '../CSS/Register.css'
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { AuthContext } from "../../Utility/AuthContex";
+import { useContext } from "react";
 export default function Register() {
+  const navigate = useNavigate()
+  const { login } = useContext(AuthContext)
   const [userinfo, setUserinfo] = useState({
     username: "",
     useremail: "",
@@ -34,13 +38,23 @@ function resetvalue(){
         body: JSON.stringify(userinfo),
       });
   
-      if (!response.ok) {
+       if(response.status==409){
+        setmsg("User Already Exists login directly")
+        setvisible(true);
+        // navigate("/login")
+      }else if (!response.ok) {
         console.log("User is not registered");
         setmsg("User is not Registered")
-      } else {
+      }
+      if(response.status==200) {
         const result = await response.json();
         console.log("User registered successfully:", result);
         setmsg("User registered successfully:")
+        localStorage.setItem("token", result.token); 
+        localStorage.setItem("User", JSON.stringify(result.user));  
+        setmsg("Registration Successful");
+        login();  
+        navigate("/"); 
         resetvalue();
       }
     } catch (error) {
