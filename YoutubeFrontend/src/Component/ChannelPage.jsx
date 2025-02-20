@@ -18,6 +18,7 @@ const ChannelPage = () => {
   const [editform,setEditform] = useState(false);
   const [editedTitle,setEditTitle] = useState("");
   const [editedDesp,setEditedDesp] = useState("");
+   let uri='https://youtubebackend-rlno.onrender.com'
   function handlepop() {
     setpop(!popform);
   }
@@ -31,7 +32,7 @@ const ChannelPage = () => {
       user = JSON.parse(user);
 
       const response = await fetch(
-        `http://localhost:4000/api/channels/${user._id}`,
+        `${uri}/api/channels/${user._id}`,
         {
           method: "GET",
           headers: {
@@ -61,7 +62,7 @@ const ChannelPage = () => {
   async function channelvideo() {
     try {
       const response = await fetch(
-        `http://localhost:4000/api/vediobychannel/${id}`,
+        `${uri}/api/vediobychannel/${id}`,
         {
           method: "GET",
           headers: {
@@ -87,7 +88,7 @@ const ChannelPage = () => {
   async function handleSubscriber() {
     try {
       const response = await fetch(
-        "http://localhost:4000/api/updatesubsciber",
+        `${uri}/api/updatesubsciber`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -108,7 +109,7 @@ const ChannelPage = () => {
   async function handleview(id) {
     try {
       console.log(id)
-      const response = await fetch('http://localhost:4000/api/updateview',{
+      const response = await fetch(`${uri}/api/updateview`,{
         method:'PUT',
         headers: {
           "Content-Type": "application/json",
@@ -133,7 +134,7 @@ const ChannelPage = () => {
   // delete video 
   async function handleDeleteVideo(id) {
     try {
-       const response = await fetch(`http://localhost:4000/api/deletevediobychannel`,{
+       const response = await fetch(`${uri}/api/deletevediobychannel`,{
         method:'DELETE',
         headers:{
           'Content-Type':'application/json'
@@ -154,7 +155,7 @@ async function handleChanneledit(e) {
   e.preventDefault()
     try {
       console.log(editedTitle,editedDesp)
-      const response = await fetch(`http://localhost:4000/api/updateChannelifo`,{
+      const response = await fetch(`${uri}/api/updateChannelifo`,{
         method:'PUT',
         headers:{
           'Content-Type':'application/json'

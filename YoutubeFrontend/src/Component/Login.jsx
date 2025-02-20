@@ -12,7 +12,7 @@ export default function Login() {
     useremail: "",
     password: "",
   });
-
+ let uri='https://youtubebackend-rlno.onrender.com'
   function handleChange(e) {
     const { name, value } = e.target;
     setUserinfo((prevData) => ({ ...prevData, [name]: value }));
@@ -22,7 +22,7 @@ export default function Login() {
     setvisible(true)
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:4000/api/loginuser", {
+      const response = await fetch(`${uri}/api/loginuser`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -32,7 +32,7 @@ export default function Login() {
 
       const result = await response.json(); 
       if(response.status==404){
-        alert("User not exsits Register now")
+        alert ("User not exsits Register now")
         navigate("/register")
       }
       if (response.status !== 200) {

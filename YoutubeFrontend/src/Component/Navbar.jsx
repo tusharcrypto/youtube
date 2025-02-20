@@ -12,6 +12,7 @@ import { AuthContext } from '../../Utility/AuthContex.jsx';
 import { useNavigate } from 'react-router';
 
 const Navbar = () => {
+  
   const { isAuthorised,logout,tooglefn} = useContext(AuthContext);
   const [showProfile, setShowProfile] = useState(false);
   const [searchinfo,setsearch]= useState("");

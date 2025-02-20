@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 const ChannelForm = (prop) => {
+   let uri='https://youtubebackend-rlno.onrender.com'
   const [formData, setFormData] = useState({
     channelName: '',
     description: '',
@@ -48,7 +49,7 @@ const ChannelForm = (prop) => {
         alert('Channel created successfully!');
         let user = localStorage.getItem("User");
         user = JSON.parse(user);
-        const respone = await fetch("http://localhost:4000/api/createchannel",{
+        const respone = await fetch(`${uri}/api/createchannel`,{
           method:'POST',
           headers:{
             "Content-Type":"application/json",

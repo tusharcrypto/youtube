@@ -11,6 +11,7 @@ const VideoUploadForm = ({handlepop}) => {
     'videodesp':'',
     'category':''
   })
+   let uri='https://youtubebackend-rlno.onrender.com'
   const {id} = useParams();
 
   function handleChange(e){
@@ -21,7 +22,7 @@ const VideoUploadForm = ({handlepop}) => {
     e.preventDefault();
     // let user = localStorage.getItem("User");
     // user = JSON.parse(user);
-    const response = await fetch("http://localhost:4000/api/addvediobychannel",{
+    const response = await fetch(`${uri}/api/addvediobychannel`,{
       method:'POST',
       headers:{
         "Content-Type":'application/json',

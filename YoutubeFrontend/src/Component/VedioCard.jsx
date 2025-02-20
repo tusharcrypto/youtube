@@ -7,10 +7,10 @@ const VedioCard = () => {
   const [viddata, setData] = useState([]);
   const { search, filteropt } = useContext(AuthContext);
   console.log(filteropt);
-
+   let uri='https://youtubebackend-rlno.onrender.com'
   async function getdata() {
     try {
-      const response = await fetch("http://localhost:4000/api/homepagevedio", {
+      const response = await fetch(`${uri}/api/homepagevedio`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const VedioCard = () => {
  async function handleview(id) {
   try {
     console.log(id)
-    const response = await fetch('http://localhost:4000/api/updateview',{
+    const response = await fetch(`${uri}/api/updateview`,{
       method:'PUT',
       headers: {
         "Content-Type": "application/json",
@@ -62,7 +62,7 @@ const VedioCard = () => {
  }
   useEffect(() => {
     getdata();
-  }, [search, filteropt]); // Re-fetch when `search` or `filteropt` changes
+  }, [search, filteropt]); 
 
   if (!viddata.length) {
     return <p>Loading...</p>;
@@ -73,7 +73,7 @@ const VedioCard = () => {
       {viddata.map((vid) => (
         <Link key={vid._id} to={`/vedio/${vid._id}`} className="card">
           <img
-            className={filteropt || search ? "card-img" : "cardimgregular"}  // Apply class based on filter or search
+            className={filteropt || search ? "card-img" : "cardimgregular"}  
             src={vid.thumbnailUrl}
             alt="Video Thumbnail"
             onClick={()=>{

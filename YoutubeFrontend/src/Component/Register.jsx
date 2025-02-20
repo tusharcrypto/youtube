@@ -5,6 +5,7 @@ import { AuthContext } from "../../Utility/AuthContex";
 import { useContext } from "react";
 export default function Register() {
   const navigate = useNavigate()
+   let uri='https://youtubebackend-rlno.onrender.com'
   const { login } = useContext(AuthContext)
   const [userinfo, setUserinfo] = useState({
     username: "",
@@ -30,7 +31,7 @@ function resetvalue(){
     console.log(userinfo);
     resetvalue(e)
     try {
-      const response = await fetch("http://localhost:4000/api/registeruser", {
+      const response = await fetch(`${uri}/api/registeruser`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json", 

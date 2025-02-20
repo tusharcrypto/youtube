@@ -1,5 +1,4 @@
 import "../CSS/Vedio.css";
-// import demovedio from "../assets/Images/video.mp4";
 import jack from "../assets/Images/jack.png";
 import like from "../assets/Images/like.png";
 import dislike from "../assets/Images/dislike.png";
@@ -20,13 +19,14 @@ const Vedio = () => {
   const[substatus,setSubstatus] = useState();
   const [commentEditIndex, setCommentEditIndex] = useState(null);
   const {editflag, seteditflag} = useContext(AuthContext)
+   let uri='https://youtubebackend-rlno.onrender.com'
   let user = localStorage.getItem("User");
   user = JSON.parse(user);
 
   //get video by id
   async function getVedioById() {
     try {
-      const response = await fetch(`http://localhost:4000/api/video/${id}`);
+      const response = await fetch(`${uri}/api/video/${id}`);
       if (!response.ok) throw new Error("Failed to fetch video");
 
       const vid = await response.json();
@@ -44,7 +44,7 @@ const Vedio = () => {
   async function handleSubscriber() {
     try {
       const response = await fetch(
-        "http://localhost:4000/api/updatesubsciber",
+        `${uri}api/updatesubsciber`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -67,7 +67,7 @@ const Vedio = () => {
   async function handleVideoLike() {
     try {
       const response = await fetch(
-        "http://localhost:4000/api/updatelikebyvedio",
+        `${uri}/api/updatelikebyvedio`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -87,7 +87,7 @@ const Vedio = () => {
   async function handleVideoDislike() {
     try {
       const response = await fetch(
-        "http://localhost:4000/api/updatelikebyvedio",
+        `${uri}/api/updatelikebyvedio`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -114,7 +114,7 @@ const Vedio = () => {
       try {
         let user = localStorage.getItem("User");
         user = JSON.parse(user);
-        const response = await fetch("http://localhost:4000/api/addcomment", {
+        const response = await fetch(`${uri}/api/addcomment`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -143,7 +143,7 @@ const Vedio = () => {
     setCommentEditIndex(commetID);
     try {
       const response = await fetch(
-        "http://localhost:4000/api/updatecomment",
+        `${uri}/api/updatecomment`,
         {
           method: "PUT",
           headers: {
@@ -178,7 +178,7 @@ const Vedio = () => {
   // Delete comment
   async function handledeletComment(commentid) {
     try {
-      const response = await fetch("http://localhost:4000/api/deletecomment", {
+      const response = await fetch(`${uri}/api/deletecomment`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

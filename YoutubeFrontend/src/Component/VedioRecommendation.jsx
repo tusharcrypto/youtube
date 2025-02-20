@@ -5,9 +5,10 @@ import { useParams } from "react-router";
 const VedioRecommendation = () => {
   const [videos, setData] = useState();
   const { videoid } = useParams();
+   let uri='https://youtubebackend-rlno.onrender.com'
   // console.log(videoid)
   async function getdata() {
-    const response = await fetch("http://localhost:4000/api/homepagevedio", {
+    const response = await fetch(`${uri}/api/homepagevedio`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -20,7 +21,7 @@ const VedioRecommendation = () => {
   async function handleview(id) {
     try {
       console.log(id)
-      const response = await fetch('http://localhost:4000/api/updateview',{
+      const response = await fetch(`${uri}/api/updateview`,{
         method:'PUT',
         headers: {
           "Content-Type": "application/json",

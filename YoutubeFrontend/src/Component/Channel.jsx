@@ -9,7 +9,7 @@ import bin from '../assets/Images/delete.png'
 const Channel = () => {
   const [chanelinfo, setchannel] = useState([]); 
   const [addchannel, setaddChannel] = useState(false);
-
+  let uri='https://youtubebackend-rlno.onrender.com'
   async function getchannel() {
     try {
       let user = localStorage.getItem("User");
@@ -19,7 +19,7 @@ const Channel = () => {
       }
       user = JSON.parse(user);
 
-      const response = await fetch(`http://localhost:4000/api/channels/${user._id}`, {
+      const response = await fetch(`${uri}/api/channels/${user._id}`, {
         method: 'GET',
         headers: {
           "Content-Type": "application/json",
@@ -51,7 +51,7 @@ const Channel = () => {
   async function handleSubscriber(id) {
     try {
       const response = await fetch(
-        "http://localhost:4000/api/updatesubsciber",
+        `${uri}/api/updatesubsciber`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -84,7 +84,7 @@ const Channel = () => {
   //delete channele delete
   async function handledeleteChannel(id) {
     try {
-      const response = await fetch('http://localhost:4000/api/deletechannel',{
+      const response = await fetch(`${uri}/api/deletechannel`,{
         method:'DELETE',
         headers:{
           'Content-Type':'application/json'

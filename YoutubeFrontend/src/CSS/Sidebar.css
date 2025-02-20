@@ -3,7 +3,7 @@
   width: 15%;
   height: 100vh;
   position: fixed;
-  top: 0;
+  top: 5%;
   padding-left:2%;
   padding-top: 80px;
 }
@@ -39,7 +39,7 @@
   width: 5%;
   height: 100vh;
   position: fixed;
-  top: 0;
+  top: 5%;
   padding-left:2%;
   padding-top: 80px;
 }
